@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Deprem Türleri</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    /* Diğer stiller burada yer alacak */
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .banner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background-color: #f8f8f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .title {
+      animation: glow 1.5s infinite alternate;
+      font-size: 2rem;
+      font-family: Arial, sans-serif;
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
+      font-family: Arial, sans-serif;
+      margin-top: 10px;
+    }
+
+    @keyframes glow {
+      0% {
+        text-shadow: none;
+      }
+      50% {
+        text-shadow: 0 0 5px #0800ff;
+      }
+      100% {
+        text-shadow: none;
+      }
+    }
+
+    .menu-container {
+      position: absolute;
+      top: 80px;
+      left: 0;
+      width: 100%;
+      background-color: #f8f8f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .menu {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .menu-item {
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-family: Arial, sans-serif;
+      font-size: 1.2rem;
+    }
+
+    .menu-item:hover {
+      background-color: #b300ff;
+      color: #fff;
+    }
+
+    .divider {
+      width: 100%;
+      height: 5px;
+      background-color: #000;
+      position: absolute;
+      display: flex;
+      z-index: 10000;
+      top: 75px;
+    }
+
+    .divider2 {
+      width: 100%;
+      height: 5px;
+      background-color: #000;
+      position: absolute;
+      display: flex;
+      z-index: 10000;
+      top: 130px;
+    }
+
+    .deprem-turu-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 20px;
+      position: absolute;
+      width: 100%;
+      top: 150px;
+    }
+
+    .deprem-turu {
+      flex-basis: calc(33.33% - 20px);
+      margin: 10px;
+      padding: 20px;
+      background-color: #f8f8f8;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      animation: fade 1s;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .deprem-turu:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.8);
+      z-index: 1;
+      transition: left 0.3s;
+    }
+
+    .deprem-turu:hover:before {
+      left: 100%;
+    }
+
+    .deprem-turu h3 {
+      font-size: 1.5rem;
+      color: #333;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .deprem-turu p {
+      font-size: 1rem;
+      color: #666;
+      position: relative;
+      z-index: 2;
+      opacity: 0.5;
+      transform: translateY(20px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .deprem-turu:hover p {
+      opacity: 1;
+      transform: translateY(0);
+      color:rgb(246, 246, 249);
+    }
+    .deprem-turu:hover  {
+background-color: #000;
+    }
+
+
+    .deprem-turu:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .deprem-turu:hover h3
+    {
+      color:rgb(216, 164, 229);
+    }
+
+    .link-style {
+      text-decoration: none;
+    }
+
+    .link-style:hover {
+      text-decoration: none;
+    }
+    
+    .galeri {
+      width: 100%;
+      overflow: hidden;
+
+    }
+
+    .galeri-inner {
+      display: flex;
+      animation: galeri-kayan 30s linear infinite;
+      position: absolute;
+      top:750px;
+     
+    }
+
+    .galeri-item {
+      flex-shrink: 0;
+      width: 400px;
+      height: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin:50px ;
+    }
+
+    @keyframes galeri-kayan {
+      0% {
+        transform: translateX(0%);
+      }
+      20% {
+        transform: translateX(-25%);
+      }
+      40% {
+        transform: translateX(-50%);
+      }
+      60% {
+        transform: translateX(-75%);
+      }
+      80% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(0%);
+      }
+    }
+
+    .galeri-item img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">
+    <h1 class="title text-center">Hazırlıklı mıyız?</h1>
+  </div>
+
+  <h2 class="subtitle text-center">Deprem Türleri</h2>
+
+  <div class="deprem-turu-container">
+    <div class="deprem-turu">
+      <h3>Ani Deprem</h3>
+      <p>Ani depremler, birdenbire meydana gelen ve hızlı bir şekilde enerji salınımıyla karakterize olan depremlerdir. Bu depremler genellikle fay hattı kırılmaları sonucunda ortaya çıkar.</p><br>
+      <p></p>  
+    </div>
+    <div class="deprem-turu">
+      <h3>Sürüklenme Depremi</h3>
+      <p>Sürüklenme depremleri, genellikle yavaş ve sürekli bir hareketle karakterizedir. İki fay hattının birbirine sürtünerek kayması sonucu ortaya çıkar. Bu tür depremler genellikle daha uzun sürer ve daha az enerji salınır.</p>
+    </div>
+    <div class="deprem-turu">
+      <h3>Kırılma Depremi</h3>
+      <p>Kırılma depremleri, fay hatlarındaki gerilimlerin birikmesi ve ani bir şekilde boşalması sonucu meydana gelir. Bu tür depremler genellikle büyük enerji salınımıyla karakterizedir.</p><br>
+      <p></p>
+    </div>
+    <div class="deprem-turu">
+      <h3>Faylanma Depremi</h3>
+      <p>Faylanma depremleri, fay hatlarında gerçekleşen hareketler sonucu ortaya çıkar. Fay hattının bir tarafı diğerine göre kayar, kırılır veya yükselir.</p>
+    </div>
+    <div class="deprem-turu">
+      <h3>Volkanik Deprem</h3>
+      <p>Volkanik depremler, volkanik aktiviteyle ilişkili olarak meydana gelir. Magmanın hareketi veya yanardağ patlamaları sonucu oluşabilir.</p>
+      <p></p>
+    </div>
+    <div class="deprem-turu">
+      <h3>Yüzey Dalgası</h3>
+      <p>Yüzey dalgaları, depremin yüzeydeki etkilerini taşıyan dalgaları ifade eder. Bu dalgalar genellikle daha düşük frekanslara sahiptir ve daha büyük zararlar meydana getirebilir.</p>
+    </div>
+    <div class="deprem-turu">
+      <h3>Sıvılaşma Depremi</h3>
+      <p>Sıvılaşma depremleri, zeminin su içeriği ve yapısal özellikleri nedeniyle yer kabuğunda meydana gelen titreşimler sonucu ortaya çıkar. Bu durumda, toprak su içeriğini kaybeder ve sıvı kıvamına dönüşür.</p>
+    </div>
+    <div class="deprem-turu">
+      <h3>Yer Kabuğu Hareketi</h3>
+      <p>Yer kabuğu hareketi, levha tektoniği teorisiyle ilişkili olarak meydana gelen depremlerdir. Levhaların birbirine göre hareket etmesi sonucunda deprem oluşabilir.</p>
+    </div>
+    <div class="deprem-turu">
+      <h3>Yüksek Frekanslı Deprem</h3>
+      <p>Yüksek frekanslı depremler, daha yüksek frekans aralığındaki titreşimlerle karakterizedir. Bu tür depremler genellikle daha küçük çapta olur ve kısa süreli zararlara neden olabilir.</p><br>
+    </div>
+  </div>
+
+  <div class="galeri">
+    <div class="galeri-inner">
+      <div class="galeri-item">
+        <img src="gifs/deprem.gif" alt="Gif 1" width="400" height="400">
+      </div>
+      <div class="galeri-item">
+        <img src="gifs/deprem2.gif" alt="Gif 2" width="400" height="400">
+      </div>
+      <div class="galeri-item">
+        <img src="gifs/deprem3.gif" alt="Gif 3" width="400" height="400">
+      </div>
+      <div class="galeri-item">
+        <img src="gifs/deprem4.gif" alt="Gif 4" width="400" height="400">
+      </div>
+      <div class="galeri-item">
+        <img src="gifs/deprem5.gif" alt="Gif 5" width="400" height="400">
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-container">
+    <ul class="menu">
+      <a href="index.html" class="link-style"><li class="menu-item">Ana Sayfa</li></a>
+      <a href="depremnedir.html" class="link-style"><li class="menu-item">Deprem Nedir?</li></a>
+      <a href="depremolcumu.html" class="link-style"><li class="menu-item">Deprem Ölçümü</li></a>
+      <a href="depremriskanalizi.html" class="link-style"><li class="menu-item">Deprem Risk Analizi</li></a>
+      <a href="depremguvenligi.html" class="link-style"><li class="menu-item">Deprem Güvenliği</li></a>
+      <a href="depremsigortasi.html" class="link-style"><li class="menu-item">Deprem Sigortası</li></a>
+      <a href="afetplanlamasi.html" class="link-style"><li class="menu-item">Afet Planlaması</li></a>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+  <div class="divider2"></div>
+  <div style="position: absolute; left:0px;bottom:-550px;width: 100%; z-index: 100000; text-align: center; padding: 20px; background-color: #0a0a0a; color: whitesmoke;">
+    <p style="font-size: 1rem;">2023 Hakları Saklıdır. Tüm Hakları Bana Aittir.</p>
+  </div>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Deprem Nedir?</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    .menu-container {
+      position: absolute;
+      top: 80px;
+      left: 0;
+      width: 100%;
+      background-color: #f8f8f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    
+    .menu {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .menu-item {
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-family: Arial, sans-serif;
+      font-size: 1.2rem;
+    }
+    .menu-item:hover {
+      background-color: #b300ff;
+      color: #fff;
+    }
+        
+    .link-style {
+      text-decoration: none;
+    }
+    
+    .link-style:hover {
+      text-decoration: none;
+    }
+    
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .title {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #333;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+    
+    .image-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    img {
+      max-width: 400px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+      color: red;
+    }
+    
+    .info-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    
+    .info-box {
+      position: relative;
+      width: 300px;
+      height: 220px;
+      background-color: #ff9999;
+      padding: 10px;
+      border-radius: 10px;
+      margin: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .info-box::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 70%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 40px;
+      background-color: blue;
+      border-radius: 50%;
+    }
+    
+    h3 {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: white;
+    }
+    
+    p {
+      margin-bottom: 10px;
+      text-align: justify;
+      color: black;
+    }
+    
+    .info-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .info-box:hover::before {
+      animation: pulse 1s infinite;
+    }
+    
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    
+    .tooltip {
+      position: absolute;
+      background-color: #ff6666;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+    
+    .info-box:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .animation-container {
+      position: relative;
+      width: 100%;
+      height: 50px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    
+    .animation-text {
+      position: absolute;
+      left: 200px;
+      margin-left: 20px;
+      font-size: 32px;
+      font-weight: bold;
+      color: rgb(137, 63, 63);
+      background-color: #d666ff;
+      padding: 10px 20px;
+      border-radius: 10px;
+      animation: slideRight 5s linear infinite;
+    }
+    
+    .animation-text:hover {
+      animation-play-state: paused;
+      transform: scale(1.1);
+    }
+    
+    @keyframes slideRight {
+      0% {
+        transform: translateX(-100%);
+        opacity: 1;
+      }
+      90% {
+        transform: translateX(100%);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+        
+    .divider {
+      width: 100%;
+      height: 5px;
+      background-color: #000;
+      position: absolute;
+      display: flex;
+      z-index: 10000;
+      top: 75px;
+    }
+    
+    .divider2 {
+      width: 100%;
+      height: 5px;
+      background-color: #000;
+      position: absolute;
+      display: flex;
+      z-index: 10000;
+      top: 127px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="banner">
+      <h1 class="title">Hazırlıklı mıyız?</h1>
+    </div>
+
+    <div class="menu-container">
+      <ul class="menu">
+        <a href="index.html" class="link-style"><li class="menu-item">Ana Sayfa</li></a>
+       
+        <a href="depremturleri.html" class="link-style"><li class="menu-item">Deprem Türleri</li></a>
+        <a href="depremolcumu.html" class="link-style"><li class="menu-item">Deprem Ölçümü</li></a>
+        <a href="depremriskanalizi.html" class="link-style"><li class="menu-item">Deprem Risk Analizi</li></a>
+        <a href="depremguvenligi.html" class="link-style"><li class="menu-item">Deprem Güvenliği</li></a>
+        <a href="depremsigortasi.html" class="link-style"><li class="menu-item">Deprem Sigortası</li></a>
+        <a href="afetplanlamasi.html" class="link-style"><li class="menu-item">Afet Planlaması</li></a>
+      </ul>
+    </div>
+    <div class="divider"></div>
+    <div class="divider2"></div>
+
+    <h1 class="title">Deprem Nedir?</h1>
+    <div class="image-container">
+      <img src="deprem.jpg" alt="Deprem">
+    </div>
+    <div class="animation-container">
+      <div class="animation-text">DEPREMİ ANLAYALIM</div>
+    </div>
+    <div class="info-container">
+      <div class="info-box">
+        <h3>Deprem Nedir?</h3>
+        <p>Deprem, yer kabuğunda meydana gelen enerjinin serbest kalması sonucu ortaya çıkan titreşimlerdir.</p>
+        <div class="tooltip">Depremler sismograf ile ölçülür. Bu olayları inceleyen bilim dalına da sismoloji denir.</div>
+      </div>
+      <div class="info-box">
+        <h3>Deprem Türleri</h3>
+        <p>Depremler farklı türlerde olabilir, örneğin sarsıntılar, yer kaymaları, volkanik depremler vb.</p>
+        <div class="tooltip">Deprem, yer sarsıntısı, seizma veya zelzele, yer kabuğunda beklenmedik bir anda ortaya çıkan enerji sonucunda meydana gelen sismik dalgalanmalar ve bu dalgaların yeryüzünü sarsması olayıdır.</div>
+      </div>
+      <div class="info-box">
+        <h3>Deprem Riski</h3>
+        <p>Bazı bölgeler diğerlerine göre daha yüksek deprem riskine sahip olabilir. Bu risklerin değerlendirilmesi önemlidir.</p>
+        <div class="tooltip">Bazı bölgeler diğerlerine göre daha yüksek deprem riskine sahip olabilir. Bu risklerin değerlendirilmesi önemlidir.</div>
+      </div>
+      <div class="info-box">
+        <h3>Deprem Büyüklüğü</h3>
+        <p>Depremin büyüklüğü Moment magnitüd ölçeği (ya da eskiden kullanımda olan Richter ölçeği) ile belirlenir.</p>
+        <div class="tooltip">Sarsıntının şiddeti Mercalli şiddet ölçeği ile ölçülür. Depremin meydana geldiği noktanın derinliği de yıkım kuvveti üzerinde etkilidir, bu sebepten yeryüzüne yakın noktalarda gerçekleşen depremler daha çok hasara neden olmaktadır.</div>
+      </div>
+      <div class="info-box">
+        <h3>Tsunamiler</h3>
+        <p>Dünya yüzeyinde gerçekleşen güçlü depremler, bazen tsunami adı verilen dev dalgaların oluşmasına neden olabilir.</p>
+        <div class="tooltip">Bu sarsıntılar ayrıca toprak kayması ve volkanik aktiviteleri de tetikleyebilir.</div>
+      </div>
+      <div class="info-box">
+        <h3>Fay Hatları</h3>
+        <p>Depremler genellikle kırıkların (fay hatları) çatlamasıyla oluşur.</p>
+        <div class="tooltip">Depremler genellikle kırıkların (fay hatları) çatlamasıyla oluşur.</div>
+      </div>
+      <div class="info-box">
+        <h3>Diğer Sebepler</h3>
+        <p>Volkanik faaliyetler, toprak kaymaları, patlamalar veya nükleer testler gibi etkenler de depremlere neden olabilir.</p>
+        <div class="tooltip">Artçı sarsıntı, bir önceki deprem olan ana şoktan sonra meydana gelen bir depremdir.</div>
+      </div>
+      <div class="info-box">
+        <h3>Artçı Sarsıntılar</h3>
+        <p>Artçı sarsıntılar, ana depremden sonra meydana gelen daha küçük depremlerdir.</p>
+        <div class="tooltip">Artçı sarsıntılar ana depremin hissedildiği merkezde gerçekleşir.</div>
+      </div>
+      <div class="info-box">
+        <h3>Hasar Etkisi</h3>
+        <p>Artçı sarsıntılar, daha önce hasar görmüş binalara daha fazla zarar verebilir.</p>
+        <div class="tooltip">Artçı sarsıntılar ana depremin hissedildiği merkezde gerçekleşir ancak büyüklük olarak ondan daha küçüktür.</div>
+      </div>
+      <div class="info-box">
+        <h3>Deprem Ölçümü</h3>
+        <p>Depremler sismograflar kullanılarak ölçülür ve incelenir.</p>
+        <div class="tooltip">Depremler sismograf ile ölçülür. Bu olayları inceleyen bilim dalına da sismoloji denir.</div>
+      </div>
+      <div class="info-box">
+        <h3>Deprem Araştırmaları</h3>
+        <p>Depremleri inceleyen bilim dalına sismoloji denir.</p>
+        <div class="tooltip">Depremler sismograf ile ölçülür. Bu olayları inceleyen bilim dalına da sismoloji denir.</div>
+      </div>
+      <div class="info-box">
+        <h3>Deprem Ölçekleri</h3>
+        <p>Depremin büyüklüğü ve şiddeti çeşitli ölçeklerle belirlenir.</p>
+        <div class="tooltip">Depremin büyüklüğü Moment magnitüd ölçeği ve sarsıntının şiddeti Mercalli şiddet ölçeği ile ölçülür.</div>
+      </div>
+      <div class="info-box">
+        <h3>Deprem Güvenliği</h3>
+        <p>Deprem riskine karşı alınabilecek önlemler ve güvenli davranışlar vardır.</p>
+        <div class="tooltip">Deprem riskine karşı alınabilecek önlemler ve güvenli davranışlar vardır.</div>
+      </div>
+      <div class="info-box">
+        <h3>Deprem Sonuçları</h3>
+        <p>Deprem sonucunda can ve mal kayıpları yaşanabilir, yapılar hasar görebilir.</p>
+        <div class="tooltip">Deprem sonucunda can ve mal kayıpları yaşanabilir, yapılar hasar görebilir.</div>
+      </div>
+    </div>
+    <div style="position: absolute; left:0px;bottom:-1000px;width: 100%; z-index: 100000; text-align: center; padding: 20px; background-color: #0a0a0a; color: whitesmoke;">
+      <p style="font-size: 1rem; color: #f8f8f8; text-align: center;">2023 Hakları Saklıdır. Tüm Hakları Bana Aittir.</p>
+    </div>
+</body>
+</html>

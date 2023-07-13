@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Son Depremler</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Son Depremler</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Tarih</th>
+        <th>Enlem</th>
+        <th>Boylam</th>
+        <th>Büyüklük</th>
+        <th>Derinlik</th>
+        <th>Yer</th>
+      </tr>
+    </thead>
+    <tbody id="depremListesi">
+      <!-- Depremler burada oluşturulacak -->
+    </tbody>
+  </table>
+
+  <script>
+    // Depremleri çekmek için bir API isteği yapar
+    fetch('https://api.orhanaydogdu.com.tr/deprem/live.php?limit=20')
+      .then(response => response.json())
+      .then(data => {
+        const depremListesi = document.getElementById('depremListesi');
+        data.result.forEach(deprem => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${deprem.date}</td>
+            <td>${deprem.lat}</td>
+            <td>${deprem.lng}</td>
+            <td>${deprem.ml}</td>
+            <td>${deprem.depth}</td>
+            <td>${deprem.location}</td>
+          `;
+          depremListesi.appendChild(row);
+        });
+      })
+      .catch(error => {
+        console.log('Depremler getirilirken hata oluştu:', error);
+      });
+  </script>
+</body>
+</html>
