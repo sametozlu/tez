@@ -118,7 +118,7 @@
     const list = document.getElementById("depremListesi");
     const statusText = document.getElementById("statusText");
 
-    fetch("https://api.orhanaydogdu.com.tr/deprem/live.php?limit=20")
+    fetch("https://api.orhanaydogdu.com.tr/deprem/kandilli/live?limit=20")
       .then((response) => response.json())
       .then((data) => {
         if (!data || !data.result || !data.result.length) {
@@ -126,21 +126,23 @@
           return;
         }
         data.result.forEach((deprem) => {
+          const lat = deprem.geojson && deprem.geojson.coordinates ? deprem.geojson.coordinates[1] : "-";
+          const lng = deprem.geojson && deprem.geojson.coordinates ? deprem.geojson.coordinates[0] : "-";
           const row = document.createElement("tr");
           row.innerHTML = `
-            <td>${deprem.date || "-"}</td>
-            <td>${deprem.lat || "-"}</td>
-            <td>${deprem.lng || "-"}</td>
-            <td>${deprem.ml || "-"}</td>
+            <td>${deprem.date_time || "-"}</td>
+            <td>${lat}</td>
+            <td>${lng}</td>
+            <td>${deprem.mag || "-"}</td>
             <td>${deprem.depth || "-"}</td>
-            <td>${deprem.location || "-"}</td>
+            <td>${deprem.title || "-"}</td>
           `;
           list.appendChild(row);
         });
-        statusText.textContent = "Veriler guncel olarak cekildi.";
+        statusText.textContent = "Kandilli verileri guncel olarak cekildi.";
       })
       .catch(() => {
-        statusText.textContent = "Deprem verileri getirilirken hata olustu.";
+        statusText.textContent = "Kandilli deprem verileri getirilirken hata olustu.";
       });
   </script>
 </body>
