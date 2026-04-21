@@ -65,6 +65,23 @@
       margin: 8px 0 0;
       min-height: 24px;
     }
+    .menu {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .menu a {
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 12px;
+    }
+    .menu a:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
   </style>
 </head>
 <body>
@@ -73,6 +90,12 @@
       <h1>Son Depremler</h1>
       <a href="index.html">Ana Sayfaya Don</a>
     </div>
+    <nav class="menu">
+      <a href="index.html">Anasayfa</a>
+      <a href="depremnedir.html">Deprem Nedir?</a>
+      <a href="depremturleri.html">Deprem Turleri</a>
+      <a href="sondepremler.html">Son Depremler</a>
+    </nav>
     <div class="card">
       <table>
         <thead>

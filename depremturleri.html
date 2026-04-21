@@ -1,334 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-  <title>Deprem Türleri</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deprem Turleri</title>
   <style>
-    /* Diğer stiller burada yer alacak */
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-
-    .banner {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 80px;
-      background-color: #f8f8f8;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-
-    .title {
-      animation: glow 1.5s infinite alternate;
-      font-size: 2rem;
-      font-family: Arial, sans-serif;
-    }
-
-    .subtitle {
-      font-size: 1.5rem;
-      font-family: Arial, sans-serif;
-      margin-top: 10px;
-    }
-
-    @keyframes glow {
-      0% {
-        text-shadow: none;
-      }
-      50% {
-        text-shadow: 0 0 5px #0800ff;
-      }
-      100% {
-        text-shadow: none;
-      }
-    }
-
-    .menu-container {
-      position: absolute;
-      top: 80px;
-      left: 0;
-      width: 100%;
-      background-color: #f8f8f8;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-    }
-
-    .menu {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .menu-item {
-      padding: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      font-family: Arial, sans-serif;
-      font-size: 1.2rem;
-    }
-
-    .menu-item:hover {
-      background-color: #b300ff;
-      color: #fff;
-    }
-
-    .divider {
-      width: 100%;
-      height: 5px;
-      background-color: #000;
-      position: absolute;
-      display: flex;
-      z-index: 10000;
-      top: 75px;
-    }
-
-    .divider2 {
-      width: 100%;
-      height: 5px;
-      background-color: #000;
-      position: absolute;
-      display: flex;
-      z-index: 10000;
-      top: 130px;
-    }
-
-    .deprem-turu-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: flex-start;
-      margin-top: 20px;
-      position: absolute;
-      width: 100%;
-      top: 150px;
-    }
-
-    .deprem-turu {
-      flex-basis: calc(33.33% - 20px);
-      margin: 10px;
-      padding: 20px;
-      background-color: #f8f8f8;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-      animation: fade 1s;
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .deprem-turu:before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(255, 255, 255, 0.8);
-      z-index: 1;
-      transition: left 0.3s;
-    }
-
-    .deprem-turu:hover:before {
-      left: 100%;
-    }
-
-    .deprem-turu h3 {
-      font-size: 1.5rem;
-      color: #333;
-      margin-bottom: 10px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .deprem-turu p {
-      font-size: 1rem;
-      color: #666;
-      position: relative;
-      z-index: 2;
-      opacity: 0.5;
-      transform: translateY(20px);
-      transition: opacity 0.3s, transform 0.3s;
-    }
-
-    .deprem-turu:hover p {
-      opacity: 1;
-      transform: translateY(0);
-      color:rgb(246, 246, 249);
-    }
-    .deprem-turu:hover  {
-background-color: #000;
-    }
-
-
-    .deprem-turu:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-    .deprem-turu:hover h3
-    {
-      color:rgb(216, 164, 229);
-    }
-
-    .link-style {
-      text-decoration: none;
-    }
-
-    .link-style:hover {
-      text-decoration: none;
-    }
-    
-    .galeri {
-      width: 100%;
-      overflow: hidden;
-
-    }
-
-    .galeri-inner {
-      display: flex;
-      animation: galeri-kayan 30s linear infinite;
-      position: absolute;
-      top:750px;
-     
-    }
-
-    .galeri-item {
-      flex-shrink: 0;
-      width: 400px;
-      height: 400px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin:50px ;
-    }
-
-    @keyframes galeri-kayan {
-      0% {
-        transform: translateX(0%);
-      }
-      20% {
-        transform: translateX(-25%);
-      }
-      40% {
-        transform: translateX(-50%);
-      }
-      60% {
-        transform: translateX(-75%);
-      }
-      80% {
-        transform: translateX(-100%);
-      }
-      100% {
-        transform: translateX(0%);
-      }
-    }
-
-    .galeri-item img {
-      max-width: 100%;
-      height: auto;
-    }
+    :root { --bg:#091221; --card:#0f1f37; --primary:#3b82f6; --text:#e5edf9; --muted:#9fb4d1; --border:#1f3659; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:"Segoe UI",Arial,sans-serif; color:var(--text); background:radial-gradient(circle at top,#16315b 0%,var(--bg) 48%); }
+    .container { width:min(1120px,94%); margin:0 auto; }
+    header { position:sticky; top:0; z-index:50; backdrop-filter:blur(8px); background:rgba(9,18,33,.82); border-bottom:1px solid var(--border); }
+    .nav { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; padding:14px 0; }
+    .brand { font-weight:700; }
+    .menu { display:flex; gap:10px; flex-wrap:wrap; }
+    .menu a { color:var(--text); text-decoration:none; padding:8px 12px; border-radius:999px; border:1px solid var(--border); }
+    .menu a:hover { background:var(--primary); border-color:var(--primary); }
+    main { padding:28px 0 40px; }
+    .grid { display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
+    .card { background:linear-gradient(180deg,#112848,var(--card)); border:1px solid var(--border); border-radius:14px; padding:16px; }
+    h1,h3 { margin-top:0; }
+    p { color:var(--muted); }
+    footer { border-top:1px solid var(--border); padding:20px 0 34px; text-align:center; color:var(--muted); }
   </style>
 </head>
 <body>
-  <div class="banner">
-    <h1 class="title text-center">Hazırlıklı mıyız?</h1>
-  </div>
-
-  <h2 class="subtitle text-center">Deprem Türleri</h2>
-
-  <div class="deprem-turu-container">
-    <div class="deprem-turu">
-      <h3>Ani Deprem</h3>
-      <p>Ani depremler, birdenbire meydana gelen ve hızlı bir şekilde enerji salınımıyla karakterize olan depremlerdir. Bu depremler genellikle fay hattı kırılmaları sonucunda ortaya çıkar.</p><br>
-      <p></p>  
+  <header>
+    <div class="container nav">
+      <div class="brand">Deprem Farkindalik Portali</div>
+      <nav class="menu">
+        <a href="index.html">Anasayfa</a>
+        <a href="depremnedir.html">Deprem Nedir?</a>
+        <a href="depremturleri.html">Deprem Turleri</a>
+        <a href="sondepremler.html">Son Depremler</a>
+      </nav>
     </div>
-    <div class="deprem-turu">
-      <h3>Sürüklenme Depremi</h3>
-      <p>Sürüklenme depremleri, genellikle yavaş ve sürekli bir hareketle karakterizedir. İki fay hattının birbirine sürtünerek kayması sonucu ortaya çıkar. Bu tür depremler genellikle daha uzun sürer ve daha az enerji salınır.</p>
+  </header>
+  <main class="container">
+    <h1>Deprem Turleri</h1>
+    <div class="grid">
+      <article class="card">
+        <h3>Tektonik Depremler</h3>
+        <p>Fay hatlarinda biriken gerilim kirilma ile bosalir. En yaygin ve en yikici deprem turudur.</p>
+      </article>
+      <article class="card">
+        <h3>Volkanik Depremler</h3>
+        <p>Magma hareketleri nedeniyle olusur. Etkileri bolgesel olabilir ve volkanik aktivite ile iliskilidir.</p>
+      </article>
+      <article class="card">
+        <h3>Cokuntu Depremleri</h3>
+        <p>Yeralti bosluklarinin cokmesi sonucunda meydana gelir. Genellikle kucuk olcekli hissedilir.</p>
+      </article>
+      <article class="card">
+        <h3>Yapay Depremler</h3>
+        <p>Insan faaliyetleri sonucu olusabilir. Buyuk patlamalar veya maden faaliyetleri buna neden olabilir.</p>
+      </article>
     </div>
-    <div class="deprem-turu">
-      <h3>Kırılma Depremi</h3>
-      <p>Kırılma depremleri, fay hatlarındaki gerilimlerin birikmesi ve ani bir şekilde boşalması sonucu meydana gelir. Bu tür depremler genellikle büyük enerji salınımıyla karakterizedir.</p><br>
-      <p></p>
-    </div>
-    <div class="deprem-turu">
-      <h3>Faylanma Depremi</h3>
-      <p>Faylanma depremleri, fay hatlarında gerçekleşen hareketler sonucu ortaya çıkar. Fay hattının bir tarafı diğerine göre kayar, kırılır veya yükselir.</p>
-    </div>
-    <div class="deprem-turu">
-      <h3>Volkanik Deprem</h3>
-      <p>Volkanik depremler, volkanik aktiviteyle ilişkili olarak meydana gelir. Magmanın hareketi veya yanardağ patlamaları sonucu oluşabilir.</p>
-      <p></p>
-    </div>
-    <div class="deprem-turu">
-      <h3>Yüzey Dalgası</h3>
-      <p>Yüzey dalgaları, depremin yüzeydeki etkilerini taşıyan dalgaları ifade eder. Bu dalgalar genellikle daha düşük frekanslara sahiptir ve daha büyük zararlar meydana getirebilir.</p>
-    </div>
-    <div class="deprem-turu">
-      <h3>Sıvılaşma Depremi</h3>
-      <p>Sıvılaşma depremleri, zeminin su içeriği ve yapısal özellikleri nedeniyle yer kabuğunda meydana gelen titreşimler sonucu ortaya çıkar. Bu durumda, toprak su içeriğini kaybeder ve sıvı kıvamına dönüşür.</p>
-    </div>
-    <div class="deprem-turu">
-      <h3>Yer Kabuğu Hareketi</h3>
-      <p>Yer kabuğu hareketi, levha tektoniği teorisiyle ilişkili olarak meydana gelen depremlerdir. Levhaların birbirine göre hareket etmesi sonucunda deprem oluşabilir.</p>
-    </div>
-    <div class="deprem-turu">
-      <h3>Yüksek Frekanslı Deprem</h3>
-      <p>Yüksek frekanslı depremler, daha yüksek frekans aralığındaki titreşimlerle karakterizedir. Bu tür depremler genellikle daha küçük çapta olur ve kısa süreli zararlara neden olabilir.</p><br>
-    </div>
-  </div>
-
-  <div class="galeri">
-    <div class="galeri-inner">
-      <div class="galeri-item">
-        <img src="gifs/deprem.gif" alt="Gif 1" width="400" height="400">
-      </div>
-      <div class="galeri-item">
-        <img src="gifs/deprem2.gif" alt="Gif 2" width="400" height="400">
-      </div>
-      <div class="galeri-item">
-        <img src="gifs/deprem3.gif" alt="Gif 3" width="400" height="400">
-      </div>
-      <div class="galeri-item">
-        <img src="gifs/deprem4.gif" alt="Gif 4" width="400" height="400">
-      </div>
-      <div class="galeri-item">
-        <img src="gifs/deprem5.gif" alt="Gif 5" width="400" height="400">
-      </div>
-    </div>
-  </div>
-
-  <div class="menu-container">
-    <ul class="menu">
-      <a href="index.html" class="link-style"><li class="menu-item">Ana Sayfa</li></a>
-      <a href="depremnedir.html" class="link-style"><li class="menu-item">Deprem Nedir?</li></a>
-      <a href="depremolcumu.html" class="link-style"><li class="menu-item">Deprem Ölçümü</li></a>
-      <a href="depremriskanalizi.html" class="link-style"><li class="menu-item">Deprem Risk Analizi</li></a>
-      <a href="depremguvenligi.html" class="link-style"><li class="menu-item">Deprem Güvenliği</li></a>
-      <a href="depremsigortasi.html" class="link-style"><li class="menu-item">Deprem Sigortası</li></a>
-      <a href="afetplanlamasi.html" class="link-style"><li class="menu-item">Afet Planlaması</li></a>
-    </ul>
-  </div>
-
-  <div class="divider"></div>
-  <div class="divider2"></div>
-  <div style="position: absolute; left:0px;bottom:-550px;width: 100%; z-index: 100000; text-align: center; padding: 20px; background-color: #0a0a0a; color: whitesmoke;">
-    <p style="font-size: 1rem;">2023 Hakları Saklıdır. Tüm Hakları Bana Aittir.</p>
-  </div>
-
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </main>
+  <footer>Deprem farkindaligi icin egitim amacli icerik.</footer>
 </body>
 </html>
