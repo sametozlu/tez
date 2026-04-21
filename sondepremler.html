@@ -117,33 +117,58 @@
   <script>
     const list = document.getElementById("depremListesi");
     const statusText = document.getElementById("statusText");
+    const endpoints = [
+      { url: "https://api.orhanaydogdu.com.tr/deprem/kandilli/live?limit=20", name: "Kandilli" },
+      { url: "https://api.orhanaydogdu.com.tr/deprem/afad/live?limit=20", name: "AFAD" }
+    ];
 
-    fetch("https://api.orhanaydogdu.com.tr/deprem/kandilli/live?limit=20")
-      .then((response) => response.json())
-      .then((data) => {
-        if (!data || !data.result || !data.result.length) {
-          statusText.textContent = "Deprem verisi su an alinamadi.";
-          return;
-        }
-        data.result.forEach((deprem) => {
-          const lat = deprem.geojson && deprem.geojson.coordinates ? deprem.geojson.coordinates[1] : "-";
-          const lng = deprem.geojson && deprem.geojson.coordinates ? deprem.geojson.coordinates[0] : "-";
-          const row = document.createElement("tr");
-          row.innerHTML = `
-            <td>${deprem.date_time || "-"}</td>
-            <td>${lat}</td>
-            <td>${lng}</td>
-            <td>${deprem.mag || "-"}</td>
-            <td>${deprem.depth || "-"}</td>
-            <td>${deprem.title || "-"}</td>
-          `;
-          list.appendChild(row);
-        });
-        statusText.textContent = "Kandilli verileri guncel olarak cekildi.";
-      })
-      .catch(() => {
-        statusText.textContent = "Kandilli deprem verileri getirilirken hata olustu.";
+    function normalize(deprem) {
+      const lat = deprem.geojson && deprem.geojson.coordinates ? deprem.geojson.coordinates[1] : (deprem.lat || "-");
+      const lng = deprem.geojson && deprem.geojson.coordinates ? deprem.geojson.coordinates[0] : (deprem.lng || "-");
+      return {
+        date: deprem.date_time || deprem.date || "-",
+        lat,
+        lng,
+        mag: deprem.mag || deprem.ml || "-",
+        depth: deprem.depth || "-",
+        place: deprem.title || deprem.location || "-"
+      };
+    }
+
+    function renderRows(items) {
+      items.forEach((deprem) => {
+        const d = normalize(deprem);
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${d.date}</td>
+          <td>${d.lat}</td>
+          <td>${d.lng}</td>
+          <td>${d.mag}</td>
+          <td>${d.depth}</td>
+          <td>${d.place}</td>
+        `;
+        list.appendChild(row);
       });
+    }
+
+    async function loadEarthquakes() {
+      for (const endpoint of endpoints) {
+        try {
+          const response = await fetch(endpoint.url, { cache: "no-store" });
+          if (!response.ok) continue;
+          const data = await response.json();
+          if (!data || !Array.isArray(data.result) || !data.result.length) continue;
+          renderRows(data.result);
+          statusText.textContent = endpoint.name + " verileri guncel olarak cekildi.";
+          return;
+        } catch (err) {
+          console.error("Deprem verisi hatasi:", endpoint.name, err);
+        }
+      }
+      statusText.textContent = "Deprem verileri getirilirken hata olustu. Lutfen sayfayi yenileyin.";
+    }
+
+    loadEarthquakes();
   </script>
 </body>
 </html>
