@@ -1,67 +1,123 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Son Depremler</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    :root {
+      --bg: #091221;
+      --card: #0f1f37;
+      --text: #e5edf9;
+      --border: #1f3659;
+      --primary: #3b82f6;
+      --muted: #9fb4d1;
     }
-
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top, #16315b 0%, var(--bg) 48%);
+    }
+    .container {
+      width: min(1120px, 94%);
+      margin: 0 auto;
+      padding: 30px 0 44px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .header a {
+      text-decoration: none;
+      color: #fff;
+      border: 1px solid var(--border);
+      background: var(--primary);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-weight: 600;
+    }
+    .card {
+      background: linear-gradient(180deg, #112848, var(--card));
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: auto;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
+      min-width: 760px;
     }
-
+    thead { background: #0a172a; }
     th, td {
-      padding: 8px;
+      padding: 12px 10px;
       text-align: left;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid var(--border);
+      font-size: .95rem;
     }
-
-    th {
-      background-color: #f2f2f2;
+    .status {
+      color: var(--muted);
+      margin: 8px 0 0;
+      min-height: 24px;
     }
   </style>
 </head>
 <body>
-  <h1>Son Depremler</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Tarih</th>
-        <th>Enlem</th>
-        <th>Boylam</th>
-        <th>Büyüklük</th>
-        <th>Derinlik</th>
-        <th>Yer</th>
-      </tr>
-    </thead>
-    <tbody id="depremListesi">
-      <!-- Depremler burada oluşturulacak -->
-    </tbody>
-  </table>
+  <main class="container">
+    <div class="header">
+      <h1>Son Depremler</h1>
+      <a href="index.html">Ana Sayfaya Don</a>
+    </div>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Tarih</th>
+            <th>Enlem</th>
+            <th>Boylam</th>
+            <th>Buyukluk</th>
+            <th>Derinlik</th>
+            <th>Yer</th>
+          </tr>
+        </thead>
+        <tbody id="depremListesi"></tbody>
+      </table>
+    </div>
+    <p class="status" id="statusText">Veriler yukleniyor...</p>
+  </main>
 
   <script>
-    // Depremleri çekmek için bir API isteği yapar
-    fetch('https://api.orhanaydogdu.com.tr/deprem/live.php?limit=20')
-      .then(response => response.json())
-      .then(data => {
-        const depremListesi = document.getElementById('depremListesi');
-        data.result.forEach(deprem => {
-          const row = document.createElement('tr');
+    const list = document.getElementById("depremListesi");
+    const statusText = document.getElementById("statusText");
+
+    fetch("https://api.orhanaydogdu.com.tr/deprem/live.php?limit=20")
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data || !data.result || !data.result.length) {
+          statusText.textContent = "Deprem verisi su an alinamadi.";
+          return;
+        }
+        data.result.forEach((deprem) => {
+          const row = document.createElement("tr");
           row.innerHTML = `
-            <td>${deprem.date}</td>
-            <td>${deprem.lat}</td>
-            <td>${deprem.lng}</td>
-            <td>${deprem.ml}</td>
-            <td>${deprem.depth}</td>
-            <td>${deprem.location}</td>
+            <td>${deprem.date || "-"}</td>
+            <td>${deprem.lat || "-"}</td>
+            <td>${deprem.lng || "-"}</td>
+            <td>${deprem.ml || "-"}</td>
+            <td>${deprem.depth || "-"}</td>
+            <td>${deprem.location || "-"}</td>
           `;
-          depremListesi.appendChild(row);
+          list.appendChild(row);
         });
+        statusText.textContent = "Veriler guncel olarak cekildi.";
       })
-      .catch(error => {
-        console.log('Depremler getirilirken hata oluştu:', error);
+      .catch(() => {
+        statusText.textContent = "Deprem verileri getirilirken hata olustu.";
       });
   </script>
 </body>
